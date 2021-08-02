@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import FeatherIcon from 'feather-icons-react'
 import classnames from 'classnames'
 import { useTranslation } from 'react-i18next'
 import { useRouter } from 'next/router'
@@ -192,7 +193,7 @@ const FormStepper = (props) => {
   const activeCircleClassNames = 'bg-card border-highlight-1'
   const inactiveCircleClassNames = 'bg-card-selected border-transparent'
 
-  const defaultLabelClassNames = 'font-inter text-xxs font-semibold mt-2 relative trans'
+  const defaultLabelClassNames = 'font-inter text-xxs font-semibold relative trans'
   const activeLabelClassNames = 'text-highlight-1'
   const inactiveLabelClassNames = 'text-primary-soft opacity-60'
 
@@ -200,49 +201,55 @@ const FormStepper = (props) => {
   const activeBarClassNames = 'bg-highlight-1'
   const inactiveBarClassNames = 'bg-transparent'
 
-  return (
-    <>
-      <div
-        className='bg-card-selected w-2/3 flex justify-between items-center mt-10 relative mx-auto'
-        style={{ height: 2 }}
-      >
-        <div className='w-full flex justify-between items-center absolute t-0 l-0 r-0 b-0 z-20'>
-          <div
-            className={classnames(defaultCircleClassNames, {
-              [activeCircleClassNames]: activeStep >= 1,
-              [inactiveCircleClassNames]: activeStep < 1
-            })}
-          ></div>
-          <div
-            className={classnames(defaultCircleClassNames, {
-              [activeCircleClassNames]: activeStep >= 2,
-              [inactiveCircleClassNames]: activeStep < 2
-            })}
-          ></div>
-          <div
-            className={classnames(defaultCircleClassNames, {
-              [activeCircleClassNames]: activeStep >= 3,
-              [inactiveCircleClassNames]: activeStep < 3
-            })}
-          ></div>
-        </div>
+  const Circles = () => {
+    return (
+      <>
+        <div
+          className={classnames(defaultCircleClassNames, {
+            [activeCircleClassNames]: activeStep >= 1,
+            [inactiveCircleClassNames]: activeStep < 1
+          })}
+        ></div>
+        <div
+          className={classnames(defaultCircleClassNames, {
+            [activeCircleClassNames]: activeStep >= 2,
+            [inactiveCircleClassNames]: activeStep < 2
+          })}
+        ></div>
+        <div
+          className={classnames(defaultCircleClassNames, {
+            [activeCircleClassNames]: activeStep >= 3,
+            [inactiveCircleClassNames]: activeStep < 3
+          })}
+        ></div>
+      </>
+    )
+  }
 
+  const Bars = () => {
+    return (
+      <>
         <div
           className={classnames(defaultBarClassNames, {
             [activeBarClassNames]: activeStep > 1,
             [inactiveBarClassNames]: activeStep <= 1
           })}
-          style={{ height: 2, left: 2 }}
+          style={{ height: 2, top: 6, left: 2 }}
         ></div>
         <div
           className={classnames(defaultBarClassNames, {
             [activeBarClassNames]: activeStep > 2,
             [inactiveBarClassNames]: activeStep <= 2
           })}
-          style={{ height: 2, right: 2 }}
+          style={{ height: 2, top: 6, right: 2 }}
         ></div>
-      </div>
-      <div className='w-2/3 flex justify-between items-center mt-2 relative mx-auto'>
+      </>
+    )
+  }
+
+  const Labels = () => {
+    return (
+      <div className='flex justify-between items-center mt-2 relative mx-auto'>
         <div
           className={classnames(defaultLabelClassNames, {
             [activeLabelClassNames]: activeStep >= 1,
@@ -270,6 +277,45 @@ const FormStepper = (props) => {
         >
           Confirm Order
         </div>
+      </div>
+    )
+  }
+
+  const DepositCompleteMessage = (props) => {
+    return (
+      <div className={classnames('absolute flex flex-col w-full trans', activeLabelClassNames)}>
+        <FeatherIcon icon='check-circle' className={classnames('w-4 h-4 mx-auto stroke-current')} />
+        <div className={classnames('text-center', defaultLabelClassNames)}>Deposit complete!</div>
+      </div>
+    )
+  }
+
+  return (
+    <>
+      <div className='mt-6 pb-6 relative'>
+        <span
+          className={classnames({
+            'opacity-0 trans': activeStep !== 4
+          })}
+        >
+          <DepositCompleteMessage />
+        </span>
+
+        <span
+          className={classnames({
+            'opacity-0 trans': activeStep > 3
+          })}
+        >
+          <div className='w-2/3 mx-auto relative bg-card-selected' style={{ height: 2 }}>
+            <div className='flex justify-between items-center relative'>
+              <Circles />
+            </div>
+            <div className='flex justify-between items-center w-full absolute t-0 l-0 r-0 b-0 z-20'>
+              <Bars />
+            </div>
+            <Labels />
+          </div>
+        </span>
       </div>
     </>
   )
