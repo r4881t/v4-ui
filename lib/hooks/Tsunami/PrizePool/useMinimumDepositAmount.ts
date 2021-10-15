@@ -4,9 +4,13 @@ import { TSUNAMI_USDC_PRIZE_DISTRIBUTION } from 'lib/constants/prizeDistribution
 import { NO_REFETCH } from 'lib/constants/queryKeys'
 import { getAmountFromString } from 'lib/utils/getAmountFromString'
 import { useQuery } from 'react-query'
+// import { useAllDrawsAndPrizeDistributions } from 'lib/hooks/Tsunami/PrizeDistributor/useAllDrawsAndPrizeDistributions'
 
 export const useMinimumDepositAmount = (prizePool: PrizePool, token: Token) => {
   const enabled = Boolean(prizePool) && Boolean(token)
+
+  // const { data } = useAllDrawsAndPrizeDistributions()
+
   return useQuery(
     ['useMinimumDepositAmount', prizePool?.id()],
     () => getMinimumDepositAmount(prizePool, token),

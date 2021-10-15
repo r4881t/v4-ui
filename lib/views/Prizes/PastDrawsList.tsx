@@ -36,6 +36,7 @@ export const PastDrawsList = (props: {
 
   const { data: drawsAndPrizeDistributions, isFetched: isDrawsAndPrizeDistributionsFetched } =
     useAllDrawsAndPrizeDistributions(prizeDistributor)
+  console.log({ drawsAndPrizeDistributions })
   const { data: claimedAmounts } = useUsersClaimedAmounts(prizeDistributor, prizePoolTokens?.token)
   const { data: drawLocks, isFetched: isDrawLocksFetched } = useDrawLocks()
 

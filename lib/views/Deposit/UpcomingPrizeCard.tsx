@@ -10,6 +10,8 @@ import { useDrawBeaconPeriod } from 'lib/hooks/Tsunami/LinkedPrizePool/useDrawBe
 import { useTimeUntil } from 'lib/hooks/useTimeUntil'
 import { CountdownString } from 'lib/components/CountdownString'
 import { roundPrizeAmount } from 'lib/utils/roundPrizeAmount'
+// import { useAllDrawsAndPrizeDistributions } from 'lib/hooks/Tsunami/PrizeDistributor/useAllDrawsAndPrizeDistributions'
+// import { useSelectedNetworkPrizeDistributor } from 'lib/hooks/Tsunami/PrizeDistributor/useSelectedNetworkPrizeDistributor'
 
 export const UpcomingPrizeCard = () => {
   const { t } = useTranslation()
@@ -19,6 +21,13 @@ export const UpcomingPrizeCard = () => {
   const { data: drawBeaconPeriod, isFetched: isDrawBeaconPeriodFetched } = useDrawBeaconPeriod()
 
   const countdown = useTimeUntil(drawBeaconPeriod?.endsAtSeconds.toNumber())
+
+  // const { data: prizeDistributor } = useSelectedNetworkPrizeDistributor()
+
+  // const { data: drawsAndPrizeDistributions, isFetched: isDrawsAndPrizeDistributionsFetched } =
+  //   useAllDrawsAndPrizeDistributions(prizeDistributor)
+  // console.log({ prizeDistributor })
+  // console.log({ drawsAndPrizeDistributions })
 
   const { amountPretty } = roundPrizeAmount(
     TSUNAMI_USDC_PRIZE_DISTRIBUTION.prize,
