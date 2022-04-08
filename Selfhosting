@@ -3,4 +3,4 @@ cp .envrc.example .envrc
 
 
 
-./direnv.linux-amd64 allow
+./direnv allow
