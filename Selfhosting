@@ -8,4 +8,4 @@ curl -sfL https://direnv.net/install.sh | bash
 #apk add direnv
 
 
-./direnv allow
+ /usr/local/sbin/direnv allow
