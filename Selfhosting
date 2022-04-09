@@ -1,6 +1,9 @@
 cp .envrc.example .envrc
 
-wget https://github.com/direnv/direnv/releases/download/v2.23.0/direnv.linux-amd64; mv direnv.linux-amd64 direnv; chmod 755 direnv ; ./direnv;
+#wget https://github.com/direnv/direnv/releases/download/v2.23.0/direnv.linux-amd64; mv direnv.linux-amd64 direnv; chmod 755 direnv ; ./direnv;
+
+apk update
+apk add direnv
 
 
 ./direnv allow
