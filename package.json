@@ -6,7 +6,7 @@
   "scripts": {
     "reinstall": "rm -rf .next out ./node_modules && yarn cache clean && yarn",
     "dev": "next dev",
-    "build": "next build && next export && yarn postexport",
+    "build:sbs": "next build && next export && yarn postexport",
     "postexport": "node post-export.js",
     "dist": "yarn build",
     "export": "next export",
